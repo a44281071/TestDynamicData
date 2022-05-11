@@ -24,19 +24,24 @@ namespace TestDynamicData
                 .DistinctUntilChanged()
                 .Sample(TimeSpan.FromMilliseconds(100));
 
-            itemsCache.Connect()
-                //.AutoRefresh(p => p.IsCamOn)
-                .Sort(SortExpressionComparer<UserViewModel>.Ascending(e => e.IsCamOn))
-                .Page(pager)
-                .Do(change => PageParameters.Update(change.Response))
-                .OnItemAdded(OnItemAdded)
+            var chosen = itemsCache.Connect()
+                    .AutoRefresh(p => p.IsCamOn)
+                    .Sort(SortExpressionComparer<UserViewModel>.Descending(e => e.IsCamOn))
+                    .Page(pager)
+                    .Do(change => PageParameters.Update(change.Response))
+                    .ObserveOnDispatcher();
+
+            chosen.OnItemAdded(OnItemAdded)
                 .OnItemRemoved(OnItemRemoved)
                 .OnItemRefreshed(OnItemRefreshed)
                 .OnItemUpdated(OnItemUpdated)
-                .ObserveOnDispatcher()
-                .Bind(Items)
                 .Subscribe();
 
+            // items collection
+            chosen.Bind(Items)
+                .Subscribe();
+
+            // all items collection
             itemsCache.Connect()
                 .ObserveOnDispatcher()
                 .Bind(AllItems)
@@ -107,7 +112,7 @@ namespace TestDynamicData
         {
             if (itemsCache.Items.FirstOrDefault() is UserViewModel user)
             {
-                user.IsCamOn = true;
+                user.IsCamOn = !user.IsCamOn;
             }
         }
     }
