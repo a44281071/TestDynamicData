@@ -17,6 +17,7 @@
     </Grid.RowDefinitions>
 
     <ToolBar DockPanel.Dock="Top">
+      <Button Name="ChangeAnyProperty" Content="Change"/>
       <Button Name="Pre"
               Command="{Binding PageParameters.PreviousPageCommand}"
               Content="Previous" />
@@ -26,7 +27,6 @@
       <Button Name="Add" Content="Add" />
       <Button Name="Remove" Content="Remove" />
       <Button Name="Update" Content="Update" />
-      <Button Name="ChangeName" Content="Rename" />
     </ToolBar>
     <GroupBox Grid.Row="1" Header="Items">
       <DataGrid Name="Items" />
