@@ -33,9 +33,14 @@ namespace TestDynamicData
 
                 .AutoRefresh(p => p.IsCamOn)
                 .Sort(SortExpressionComparer<UserViewModel>.Descending(e => e.IsCamOn))
-                .Page(pager)
+                .Page(pager!)
                 .Do(change => PageParameters.Update(change.Response))
-                .ObserveOnDispatcher();
+                .ObserveOnDispatcher()
+                .Publish();  //THE MAGIC IS HERE - means multiple subscribers share the output from this point onwards
+
+            // rx Connect() turns the sharing on.
+            // It is not dd Connect(). Ambiguous I know and it's a historic naming mistake.
+            var myConnectedDisposable = chosen.Connect();
 
             chosen.OnItemAdded(OnItemAdded)
                 .OnItemRemoved(OnItemRemoved)
@@ -59,6 +64,7 @@ namespace TestDynamicData
                 .ObserveOnDispatcher()
                 .Bind(AllItems)
                 .Subscribe();
+
         }
 
         private const int PAGE_SIZE = 5;
