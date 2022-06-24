@@ -1,0 +1,35 @@
+﻿<Window x:Class="TestDynamicData.Views.ShareConnectStreamView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestDynamicData.Views"
+        mc:Ignorable="d"
+        Title="ShareConnectStreamView" Height="450" Width="800">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <ToolBar DockPanel.Dock="Top">
+      <Button Name="ChangeAnyProperty" Content="Change"/>
+      <Button Name="Pre"
+              Command="{Binding PageParameters.PreviousPageCommand}"
+              Content="Previous" />
+      <Button Name="Next"
+              Command="{Binding PageParameters.NextPageCommand}"
+              Content="Next" />
+      <Button Name="Add" Content="Add" />
+      <Button Name="Remove" Content="Remove" />
+      <Button Name="Update" Content="Update" />
+    </ToolBar>
+    <GroupBox Grid.Row="1" Header="Items">
+      <DataGrid Name="Items" />
+    </GroupBox>
+    <GroupBox Grid.Row="2" Header="AllItems">
+      <DataGrid Name="AllItems" />
+    </GroupBox>
+  </Grid>
+</Window>

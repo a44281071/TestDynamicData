@@ -30,6 +30,7 @@ namespace TestDynamicData
 
             builder.RegisterType<WindowManager>().As<IWindowManager>().SingleInstance();
             builder.RegisterType<EventAggregator>().As<IEventAggregator>().SingleInstance();
+            builder.RegisterType<DataAccessor>().SingleInstance();
             builder.RegisterType<ShellViewModel>().As<IShell>();
 
             Container = builder.Build();
