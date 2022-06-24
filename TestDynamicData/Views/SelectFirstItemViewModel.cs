@@ -37,6 +37,12 @@ namespace TestDynamicData.Views
         /// </summary>
         public CountryViewModel CurrentCountry { get; set; }
 
+        // Bind command.
+        public void InsertCountry()
+        {
+            dataAccessor.InsertCountry();
+        }
+
         private IDisposable CreateCountryBind()
         {
             var handle = dataAccessor.CountryCache.Connect()

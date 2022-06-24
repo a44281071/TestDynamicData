@@ -22,21 +22,30 @@ namespace TestDynamicData
             , DataAccessor dataAccessor)
         {
             this.windowManager = windowManager;
-            ScreenItems = new()
+            this.dataAccessor = dataAccessor;
+            ScreenItems = new[]
             {
-                new ShareConnectStreamViewModel(),
-                new SelectFirstItemViewModel(dataAccessor)
+                nameof(ShareConnectStreamViewModel),
+                nameof(SelectFirstItemViewModel),
             };
         }
 
         private readonly IWindowManager windowManager;
+        private readonly DataAccessor dataAccessor;
 
-        public BindableCollection<IScreen> ScreenItems { get; }
+        public string[] ScreenItems { get; }
 
         // Binding command.
-        public async Task ShowScreen(IScreen screen)
+        public async Task ShowScreen(string screenName)
         {
-            await windowManager.ShowDialogAsync(screen);
+            if (screenName == nameof(ShareConnectStreamViewModel))
+            {
+                await windowManager.ShowDialogAsync(new ShareConnectStreamViewModel());
+            }
+            else if (screenName == nameof(SelectFirstItemViewModel))
+            {
+                await windowManager.ShowDialogAsync(new SelectFirstItemViewModel(dataAccessor));
+            }
         }
     }
 }
