@@ -11,15 +11,19 @@
         d:DataContext="{d:DesignInstance Type=local:ShellViewModel}"
         FontSize="16"
         mc:Ignorable="d">
-  <DockPanel>
-    <ListBox ItemsSource="{Binding ScreenItems}">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <Button Margin="0,3"
-                  cm:Message.Attach="ShowScreen($dataContext)"
-                  Content="{Binding}" />
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ListBox>
-  </DockPanel>
+
+  <UniformGrid Rows="1">
+    <GroupBox Header="Show">
+      <ListBox>
+        <Button Content="ShareConnectStream" />
+        <Button Content="SelectFirstItem" />
+      </ListBox>
+    </GroupBox>
+
+    <GroupBox Header="Test">
+      <ListBox>
+        <Button Content="OnItemRemovedCalled" Name="TestOnItemRemovedCalled" />
+      </ListBox>
+    </GroupBox>
+  </UniformGrid>
 </Window>
