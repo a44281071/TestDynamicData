@@ -63,13 +63,12 @@ namespace TestDynamicData.Views
                 .ObserveOnDispatcher()
                 .Bind(AllItems)
                 .Subscribe();
-
         }
 
         private const int PAGE_SIZE = 5;
         private const int FIRST_PAGE = 1;
 
-        private readonly SourceCache<UserInfo, string> itemsCache = new(dd => dd.Id);
+        private readonly SourceCache<UserInfo, Guid> itemsCache = new(dd => dd.Id);
 
         public ObservableCollectionExtended<UserViewModel> Items { get; } = new();
         public ObservableCollectionExtended<UserViewModel> AllItems { get; } = new();
@@ -111,10 +110,37 @@ namespace TestDynamicData.Views
         {
             var data = new UserInfo
             {
-                Id = Path.GetRandomFileName(),
+                Id = Guid.NewGuid(),
                 Name = Path.GetRandomFileName()
             };
             itemsCache.AddOrUpdate(data);
+        }
+
+        private UserInfo[] ListResetData()
+        {
+            var users = new UserInfo[]
+                {
+                    new UserInfo
+                    {
+                        Id = Guid.Parse("{ECBB4905-DE52-4311-8C3F-4D3DF6B3B437}"),
+                        Name = Path.GetRandomFileName()
+                    },
+                    new UserInfo
+                    {
+                        Id = Guid.Parse("{121D71B5-BD3D-4F05-88C9-E7D9D8DF92F5}"),
+                        Name = Path.GetRandomFileName()
+                    },
+                };
+            return users;
+        }
+
+        public void Reset()
+        {
+            itemsCache.Edit(cc =>
+            {
+                cc.Clear();
+                cc.AddOrUpdate(ListResetData());
+            });
         }
 
         public void Remove()

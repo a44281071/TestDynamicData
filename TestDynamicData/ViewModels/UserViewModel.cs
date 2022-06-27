@@ -15,7 +15,7 @@ namespace TestDynamicData
         }
 
         public UserInfo Info { get; }
-        public string Id => Info.Id;
+        public Guid Id => Info.Id;
 
         public bool IsMicOn { get; set; }
         public bool IsCamOn { get; set; }
