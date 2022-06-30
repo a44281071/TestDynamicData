@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Caliburn.Micro;
 using DynamicData;
 using DynamicData.Binding;
+using TestDynamicData.Test;
 using TestDynamicData.Views;
 using TheRx;
 
@@ -41,6 +42,12 @@ namespace TestDynamicData
         public void TestOnItemRemovedCalled()
         {
             var _ = new TestOnItemRemovedCalled();
+            // please watch Trace output message.
+        }
+
+        public void TestConnectDifferentCache()
+        {
+            var _ = new TestConnectDifferentCache();
             // please watch Trace output message.
         }
     }

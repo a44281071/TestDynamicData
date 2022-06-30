@@ -23,6 +23,7 @@
     <GroupBox Header="Test">
       <ListBox>
         <Button Content="OnItemRemovedCalled" Name="TestOnItemRemovedCalled" />
+        <Button Content="TestConnectDifferentCache" Name="TestConnectDifferentCache" />
       </ListBox>
     </GroupBox>
   </UniformGrid>
