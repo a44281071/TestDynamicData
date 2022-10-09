@@ -39,6 +39,12 @@ namespace TestDynamicData
             await windowManager.ShowDialogAsync(new SelectFirstItemViewModel(dataAccessor));
         }
 
+        public void TestUpdatePropertyChanged()
+        {
+            var _ = new TestUpdatePropertyChanged();
+            // please watch Trace output message.
+        }
+
         public void TestOnItemRemovedCalled()
         {
             var _ = new TestOnItemRemovedCalled();
@@ -48,6 +54,12 @@ namespace TestDynamicData
         public void TestConnectDifferentCache()
         {
             var _ = new TestConnectDifferentCache();
+            // please watch Trace output message.
+        }
+
+        public void TestRedundancyBind()
+        {
+            var _ = new TestRedundancyBind();
             // please watch Trace output message.
         }
     }

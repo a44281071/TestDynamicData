@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using Caliburn.Micro;
 using DynamicData;
 using DynamicData.Binding;
@@ -34,7 +35,7 @@ namespace TestDynamicData.Views
                 .Sort(SortExpressionComparer<UserViewModel>.Descending(e => e.IsCamOn))
                 .Page(pager!)
                 .Do(change => PageParameters.Update(change.Response))
-                .ObserveOnDispatcher()
+                //.ObserveOnDispatcher()
                 .Publish();  //THE MAGIC IS HERE - means multiple subscribers share the output from this point onwards
 
             // rx Connect() turns the sharing on.
@@ -136,11 +137,14 @@ namespace TestDynamicData.Views
 
         public void Reset()
         {
-            itemsCache.Edit(cc =>
-            {
-                cc.Clear();
-                cc.AddOrUpdate(ListResetData());
+            ThreadPool.QueueUserWorkItem(state => {
+                itemsCache.Edit(cc =>
+                {
+                    cc.Clear();
+                    cc.AddOrUpdate(ListResetData());
+                });
             });
+         
         }
 
         public void Remove()

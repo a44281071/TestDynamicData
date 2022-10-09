@@ -15,15 +15,17 @@
   <UniformGrid Rows="1">
     <GroupBox Header="Show">
       <ListBox>
-        <Button Content="ShareConnectStream" />
-        <Button Content="SelectFirstItem" />
+        <Button Name="ShareConnectStream" Content="ShareConnectStream" />
+        <Button Name="SelectFirstItem" Content="SelectFirstItem" />
       </ListBox>
     </GroupBox>
 
     <GroupBox Header="Test">
       <ListBox>
-        <Button Content="OnItemRemovedCalled" Name="TestOnItemRemovedCalled" />
-        <Button Content="TestConnectDifferentCache" Name="TestConnectDifferentCache" />
+        <Button Name="TestUpdatePropertyChanged" Content="TestUpdatePropertyChanged" />
+        <Button Name="TestOnItemRemovedCalled" Content="OnItemRemovedCalled" />
+        <Button Name="TestConnectDifferentCache" Content="TestConnectDifferentCache" />
+        <Button Name="TestRedundancyBind" Content="TestRedundancyBind" />        
       </ListBox>
     </GroupBox>
   </UniformGrid>

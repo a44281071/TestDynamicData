@@ -77,7 +77,7 @@ namespace TestDynamicData
 
         public string Key => Name;
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public string ParentName { get; }
 

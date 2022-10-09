@@ -15,8 +15,8 @@ namespace TestDynamicData.Test
         {
             var source = new SourceCache<Person, int>(x => x.Age);
             IDisposable d1 = source.Connect()
-                 .Bind(Items)
-                 .Subscribe();
+                .Bind(Items)
+                .Subscribe();
 
             var person = new Person("A", 1);
             source.AddOrUpdate(person);
@@ -25,18 +25,18 @@ namespace TestDynamicData.Test
             Trace.TraceInformation("d1 Item name = {0}", Items[0].Name);
 
             var person2 = new Person("B", 2);
-            source.Edit(ul => {
+            source.Edit(ul =>
+            {
                 source.Clear();
                 source.AddOrUpdate(person2);
             });
             IDisposable d2 = source.Connect()
-               .Bind(Items)
-               .Subscribe();
+                .Bind(Items)
+                .Subscribe();
 
             Trace.TraceInformation("d1 Item name = {0}", Items[0].Name);
         }
 
         public ObservableCollectionExtended<Person> Items { get; } = new();
-
     }
 }
